@@ -1,0 +1,89 @@
+// package sp.gov.sp.fatec.springatv20242.controller;
+
+// import java.util.List;
+
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.web.bind.annotation.CrossOrigin;
+// import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RestController;
+
+// import sp.gov.sp.fatec.springatv20242.entity.Trabalho;
+// import sp.gov.sp.fatec.springatv20242.service.TrabalhoService;
+
+// @RestController
+// @RequestMapping(value = "/trabalho")
+// @CrossOrigin
+// public class TrabalhoController {
+    
+//     @Autowired
+//     private TrabalhoService trabalhoService;
+
+//     // Rota para listar todos os trabalhos
+//     @GetMapping
+//     public List<Trabalho> listarTodosTrabalhos() {
+//         return trabalhoService.buscarTodos();
+//     }
+
+//     // Rota para cadastrar um novo trabalho
+//     @PostMapping("/cadastrar")
+//     public Trabalho cadastrarTrabalho(@RequestBody Trabalho trabalho) {
+//         return trabalhoService.novoTrabalho(trabalho);
+//     }
+
+//     // Rota para buscar trabalhos por título (palavra-chave) e nota maior que um valor específico
+//     @GetMapping("/buscar")
+//     public List<Trabalho> buscarPorTituloENota(
+//             @RequestParam String palavra, 
+//             @RequestParam Integer nota) {
+//         return trabalhoService.buscarPorPalavraNoTituloENotaMaiorQue(palavra, nota);
+//     }
+// }
+
+package sp.gov.sp.fatec.springatv20242.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import sp.gov.sp.fatec.springatv20242.entity.Anuncio;
+import sp.gov.sp.fatec.springatv20242.service.AnuncioService;
+
+@RestController
+@RequestMapping(value = "/anuncio")
+@CrossOrigin
+public class AnuncioController {
+
+    @Autowired
+    private AnuncioService anuncioService;
+
+    // Rota para cadastrar um novo anúncio
+    @PostMapping("/cadastrar")
+    public Anuncio cadastrarAnuncio(@RequestBody Anuncio anuncio) {
+        return anuncioService.novoAnuncio(anuncio);
+    }
+
+    // Rota para listar todos os registros da tabela Anuncio
+    @GetMapping("/listar")
+    public List<Anuncio> listarTodosAnuncios() {
+        return anuncioService.buscarTodos();
+    }
+
+    // Rota para buscar anúncios por nome do produto ou preço menor que um valor
+    @GetMapping("/buscar")
+    public List<Anuncio> buscarPorNomeProdutoOuPrecoMenorQue(
+            @RequestParam String texto, 
+            @RequestParam Float preco) {
+        return anuncioService.buscarPorNomeProdutoOuPrecoMenorQue(texto, preco);
+    }
+}
